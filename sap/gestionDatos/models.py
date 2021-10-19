@@ -3,6 +3,7 @@ from .choices import activo
 
 # Create your models here.
 
+
 class Domicilio(models.Model):
     domicilio = models.CharField(max_length=50)  # domicilio de correspondencia
     ciudad = models.CharField(max_length=50)
@@ -24,6 +25,7 @@ class Empresa(models.Model):
     def __str__(self):
         return f'Empresa {self.nombre_emp}: {self.tlfn_emp} {self.sitio_web} {self.descrip_emp} {self.domicilio_emp}'
 
+
 class Contacto(models.Model):
     nombre_cont = models.CharField(max_length=50)
     apellido_cont = models.CharField(primary_key=True, max_length=50)
@@ -39,6 +41,7 @@ class Contacto(models.Model):
     def __str__(self):
         return f'Contacto {self.apellido_cont}: {self.nombre_cont} {self.titulo_contacto} {self.email_cont} {self.empresa} {self.movil_cont} {self.tlfn_cont} {self.tlfn_casa} {self.email_opt_out} {self.descrip_cont}'
 
+
 class Producto(models.Model):
     nombre_prod = models.CharField(primary_key=True, max_length=50)
     cod_prod = models.CharField(unique=True, max_length=5)
@@ -50,3 +53,42 @@ class Producto(models.Model):
     def __str__(self):
         return f'Producto {self.nombre_prod}: {self.cod_prod} {self.categ_prod} {self.precio_uni} {self.descrip_prod} {self.prod_act}'
 
+
+class Usuarios(models.Model):
+    us_name = models.CharField(max_length=50)
+    us_lastname = models.CharField(max_length=50)
+    username = models.CharField(max_length=25)
+    us_password = models.CharField(max_length=15)#verificar
+    us_email = models.EmailField()
+    us_phone = models.CharField(max_length=8)
+
+    def __str__(self):
+        return f'Usuario {self.id}: {self.us_name} {self.us_lastname} {self.username} {self.username} {self.us_email}' \
+               f' {self.us_phone} '
+
+
+class Task(models.Model):
+    task_name = models.CharField(primary_key=True, max_length=50)
+    task_duedate = models.DateField()
+    repeat = models.BooleanField(default=False)
+    relatedTo = models.ForeignKey(Contacto, on_delete=models.SET_NULL, null=True)#agregar empresa y deals
+    description = models.CharField(max_length=100)
+    priority = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Tarea {self.id}: {self.task_name} {self.task_duedate} {self.repeat} {self.relatedTo} ' \
+               f'{self.description} {self.priority}'
+
+
+class Event(models.Model):
+    title = models.CharField(primary_key=True, max_length=50)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    repeat = models.BooleanField(default=False)
+    location = models.CharField(max_length=50)
+    relatedTo = models.ForeignKey(Contacto, on_delete=models.SET_NULL, null=True)#agregar empresa y deals
+    description = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'Evento {self.id}: {self.title} {self.from_date} {self.to_date} {self.repeat} {self.relatedTo} ' \
+               f'{self.description}'
