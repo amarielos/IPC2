@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from gestionDatos.models import *
 
-# Create your views here.
+def detalleUser(request, id):
+    usuario = Usuarios.objects.get(pk=id)
+    return render(request, 'gestionDatos/detalleUser.html', {'Usuario': usuario})

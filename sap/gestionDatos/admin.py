@@ -1,3 +1,4 @@
 from django.contrib import admin
+from gestionDatos.models import *
 
-# Register your models here.
+admin.site.register(Usuarios)
