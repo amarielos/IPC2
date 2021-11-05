@@ -116,5 +116,8 @@ class Trato(models.Model):
     desc = models.CharField(max_length=100)
     prod = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return f'Trato {self.id}: {self.trato_nombre} {self.cont_nombre} {self.emp_nombre} {self.estado} {self.cant} ' \
+               f'{self.fechacierre} {self.desc} {self.prod}'
 
 
