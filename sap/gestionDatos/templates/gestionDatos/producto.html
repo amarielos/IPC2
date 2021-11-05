@@ -2,7 +2,45 @@
 {% load static %}
 {% block content %}
 
-    Producto
+
+<h2>Producto</h2>
+    <nav class="user">
+        <ul>
+            <li><a href="/agregar-producto">Agregar</a></li>
+            <li><a href="">Buscar</a></li>
+            <li><a href="#">Eliminar</a></li>
+        </ul>
+    </nav>
+<table class="table table-striped table-hoved">
+    <tr>
+        <th>Nombre</th>
+        <th>Codigo</th>
+        <th>Categoria</th>
+        <th>Precio Unitario</th>
+        <th>Descripcion</th>
+        <th>Estado</th>
+    </tr>
+
+    {% for p in productos %}
+        <tr>
+            <td>{{p.nombre_prod}}</td>
+            <td>{{p.cod_prod}}</td>
+            <td>{{p.categ_prod}}</td>
+            <td>{{p.precio_uni}}</td>
+            <td>{{p.descrip_prod}}</td>
+            <td>{{p.prod_act}}</td>
+            <td>
+	        <a  class="btn btn-info btn-sm">modificar</a>
+            <a  class="btn btn-danger btn-sm">eliminar</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+
+</div>
+
 
 
 {% endblock %}

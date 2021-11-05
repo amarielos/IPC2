@@ -54,7 +54,7 @@ class Producto(models.Model):
         return f'Producto {self.nombre_prod}: {self.cod_prod} {self.categ_prod} {self.precio_uni} {self.descrip_prod} {self.prod_act}'
 
 
-class Usuarios(models.Model):
+class Usuario(models.Model):
     us_name = models.CharField(max_length=50)
     us_lastname = models.CharField(max_length=50)
     username = models.CharField(max_length=25)
@@ -67,7 +67,7 @@ class Usuarios(models.Model):
                f' {self.us_phone} '
 
 
-class Task(models.Model):
+class Tarea(models.Model):
     task_name = models.CharField(primary_key=True, max_length=50)
     task_duedate = models.DateField()
     repeat = models.BooleanField(default=False)
@@ -80,7 +80,7 @@ class Task(models.Model):
                f'{self.description} {self.priority}'
 
 
-class Event(models.Model):
+class Evento(models.Model):
     title = models.CharField(primary_key=True, max_length=50)
     from_date = models.DateField()
     to_date = models.DateField()
@@ -108,16 +108,16 @@ estados = [
 
 class Trato(models.Model):
     trato_nombre = models.CharField(primary_key=True, max_length=50)
-    cont_nombre = models.ForeignKey(Contacto, on_delete=models.SET_NULL, null=True)
-    emp_nombre = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True)
+    contacto_nombre = models.ForeignKey(Contacto, on_delete=models.SET_NULL, null=True)
+    empresa_nombre = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True)
     estado = models.IntegerField(choices=estados)
     cant = models.FloatField()
     fechacierre = models.DateField()
-    desc = models.CharField(max_length=100)
-    prod = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
+    descripcion = models.CharField(max_length=100)
+    producto = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'Trato {self.id}: {self.trato_nombre} {self.cont_nombre} {self.emp_nombre} {self.estado} {self.cant} ' \
-               f'{self.fechacierre} {self.desc} {self.prod}'
+        return f'Trato {self.id}: {self.trato_nombre} {self.contacto_nombre} {self.empresa_nombre} {self.estado} {self.cant} ' \
+               f'{self.fechacierre} {self.descripcion} {self.producto}'
 
 

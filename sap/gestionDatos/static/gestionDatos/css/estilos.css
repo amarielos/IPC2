@@ -7,23 +7,27 @@
 }
 
 nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #42AB8A;
-    height: 80px;
+    height: 60px;
     width: 100%;
 }
 nav ul{
     float: right;
+    margin-top: 10px;
     margin-right: 20px;
 }
 nav ul li{
     display: inline-block;
-    line-height: 80px;
+    line-height: 50px;
     margin: 0 5px;
 }
 nav ul li a{
     color: #fff;
     font-size: 20px;
-    padding: 7px 25px;
+    padding: 5px 15px;
     border-radius: 4px;
     text-transform: uppercase;
 }
@@ -36,4 +40,7 @@ li a.active, li a:hover{
     background: #A0D6E8;
     height: 60px;
     width: 100%;
+}
+body{
+    background-image: url(fondof.jpg);
 }
