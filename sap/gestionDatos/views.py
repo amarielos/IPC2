@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from .forms import *
@@ -9,7 +10,26 @@ def home(request):
 
 # contacto----------------------------------------------------------------------------------------------------------
 def contacto(request):
-    return render(request, 'gestionDatos/contacto.html')
+    contactos = Contacto.objects.all()
+    data = {
+        'contactos': contactos
+    }
+    return render(request, 'gestionDatos/contacto.html', data)
+
+
+def buscar_contacto(request):
+    busqueda = request.POST.get("buscar")
+    contacto = Contacto.objects.all()
+
+    if busqueda:
+        contacto = Contacto.objects.filter(
+            Q(nombre_cont__icontains=busqueda) |
+            Q(apellido_cont__icontains=busqueda) |
+            Q(titulo_contacto__icontains=busqueda) |
+            Q(descrip_cont__icontains=busqueda)
+        ).distinct()
+
+    return render(request, 'contacto.html', {'contacto': contacto})
 
 
 def agregar_contacto(request):
@@ -31,7 +51,11 @@ def agregar_contacto(request):
 
 # Producto-------------------------------------------------------------------------------------------------------------
 def producto(request):
-    return render(request, 'gestionDatos/producto.html')
+    productos = Producto.objects.all()
+    data = {
+        'productos': productos
+    }
+    return render(request, 'gestionDatos/producto.html', data)
 
 
 def agregar_producto(request):
@@ -53,7 +77,11 @@ def agregar_producto(request):
 
 # Tarea---------------------------------------------------------------------------------------------------------------
 def tarea(request):
-    return render(request, 'gestionDatos/tarea.html')
+    tareas = Tarea.objects.all()
+    data = {
+        'tareas': tareas
+    }
+    return render(request, 'gestionDatos/tarea.html', data)
 
 
 def agregar_tarea(request):
@@ -106,7 +134,11 @@ def detalleUser(request, id):
 
 # Evento---------------------------------------------------------------------------------------------------------------
 def evento(request):
-    return render(request, 'gestionDatos/evento.html')
+    eventos = Evento.objects.all()
+    data = {
+        'eventos': eventos
+    }
+    return render(request, 'gestionDatos/evento.html', data)
 
 
 def agregar_evento(request):
@@ -133,6 +165,18 @@ def empresa(request):
         'empresas': empresas
     }
     return render(request, 'gestionDatos/empresa.html', data)
+
+
+def buscar_empresa(request):
+    busqueda = request.GET.get("buscar")
+    empresa = Empresa.objects.all()
+
+    if busqueda:
+        empresa = Empresa.objects.filter(
+            Q(nombre_emp__icontains = busqueda)
+        ).distinct()
+
+    return render(request, 'empresa.html', {'empresa': empresa})
 
 
 def agregar_empresa(request):
@@ -164,7 +208,11 @@ def modificar_empresa(request, nombre):  # falta
 
 # Trato---------------------------------------------------------------------------------------------------------------
 def trato(request):
-    return render(request, 'gestionDatos/trato.html')
+    tratos = Trato.objects.all()
+    data = {
+        'tratos': tratos
+    }
+    return render(request, 'gestionDatos/trato.html', data)
 
 
 def agregar_trato(request):

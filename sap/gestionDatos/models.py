@@ -25,6 +25,7 @@ class Empresa(models.Model):
     def __str__(self):
         return f'Empresa {self.nombre_emp}: {self.tlfn_emp} {self.sitio_web} {self.descrip_emp} {self.domicilio_emp}'
 
+
 # blank=True, null=True para permitir espacios vacios
 class Contacto(models.Model):
     nombre_cont = models.CharField(max_length=50, verbose_name="Nombre")

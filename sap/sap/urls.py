@@ -21,7 +21,6 @@ from gestionDatos.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio),
-    path('usuarios', usuarios),
     path('detalle_us', detalleUser),
     path('', include('gestionDatos.urls')),
 ]
