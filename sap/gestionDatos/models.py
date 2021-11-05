@@ -92,3 +92,29 @@ class Event(models.Model):
     def __str__(self):
         return f'Evento {self.id}: {self.title} {self.from_date} {self.to_date} {self.repeat} {self.relatedTo} ' \
                f'{self.description}'
+
+
+estados = [
+    [0, "Clasificación"],
+    [1, "Dimensionamiento"],
+    [2, "Cotización de propuesta/precio"],
+    [3, "Negociación/revisión"],
+    [4, "Facturado"],
+    [5, "Pagado"],
+    [6, "Cerrado ganado"],
+    [7, "Cerrado perdido"]
+]
+
+
+class Trato(models.Model):
+    trato_nombre = models.CharField(primary_key=True, max_length=50)
+    cont_nombre = models.ForeignKey(Contacto, on_delete=models.SET_NULL, null=True)
+    emp_nombre = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True)
+    estado = models.IntegerField(choices=estados)
+    cant = models.FloatField()
+    fechacierre = models.DateField()
+    desc = models.CharField(max_length=100)
+    prod = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
+
+
+
