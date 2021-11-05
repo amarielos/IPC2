@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('repeat', models.BooleanField(default=False)),
                 ('description', models.CharField(max_length=100)),
                 ('priority', models.BooleanField(default=False)),
-                ('relatedTo', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='gestionDatos.contacto')),
+                ('relatedTo', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='gestionDatos.empresa')),
             ],
         ),
         migrations.CreateModel(
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 ('repeat', models.BooleanField(default=False)),
                 ('location', models.CharField(max_length=50)),
                 ('description', models.CharField(max_length=100)),
-                ('relatedTo', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='gestionDatos.contacto')),
+                ('relatedTo', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='gestionDatos.empresa')),
             ],
         ),
     ]

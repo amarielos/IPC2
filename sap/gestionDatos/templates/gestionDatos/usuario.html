@@ -1,0 +1,23 @@
+{% extends "gestionDatos/base.html" %}
+{% load static %}
+{% block content %}
+
+<h2>Usuarios</h2>
+    <nav class="user">
+        <ul class="user_op">
+            <li><a href="#">Agregar</a></li>
+            <li><a href="#">Buscar</a></li>
+            <li><a href="#">Eliminar</a></li>
+        </ul>
+    </nav>
+
+	<ul>
+		{% for p in usuarios %}
+			<li> {{p.id}}. {{p.username}} {{p.us_name}} {{p.us_email}}</li>
+		{% endfor %}
+
+	</ul>
+</div>
+
+
+{% endblock %}

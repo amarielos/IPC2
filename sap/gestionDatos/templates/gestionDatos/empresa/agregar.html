@@ -1,0 +1,18 @@
+{% extends "gestionDatos/base.html" %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<form action="" method="post">
+
+    {% csrf_token %}
+    {{form | crispy }}
+
+    <input type="reset" value="cancelar" class="btn btn-secondary">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+
+</form>
+{{mensaje}}
+
+
+{% endblock %}

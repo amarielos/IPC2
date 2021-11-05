@@ -16,27 +16,27 @@ class Domicilio(models.Model):
 
 
 class Empresa(models.Model):
-    nombre_emp = models.CharField(primary_key=True, max_length=50)
-    tlfn_emp = models.CharField(max_length=8)
+    nombre_emp = models.CharField(primary_key=True, max_length=50, verbose_name="Nombre")
+    tlfn_emp = models.CharField(max_length=8, verbose_name="Teléfono") # verbose_name: nombre del campo
     sitio_web = models.CharField(max_length=50)
-    descrip_emp = models.CharField(max_length=100)
+    descrip_emp = models.CharField(max_length=100, verbose_name="Descripción")
     domicilio_emp = models.ForeignKey(Domicilio, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'Empresa {self.nombre_emp}: {self.tlfn_emp} {self.sitio_web} {self.descrip_emp} {self.domicilio_emp}'
 
-
+# blank=True, null=True para permitir espacios vacios
 class Contacto(models.Model):
-    nombre_cont = models.CharField(max_length=50)
-    apellido_cont = models.CharField(primary_key=True, max_length=50)
-    titulo_contacto = models.CharField(max_length=50)
+    nombre_cont = models.CharField(max_length=50, verbose_name="Nombre")
+    apellido_cont = models.CharField(primary_key=True, max_length=50, verbose_name="Apellido")
+    titulo_contacto = models.CharField(max_length=50, verbose_name="Título")
     email_cont = models.EmailField()
     empresa = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True) # id de empresa
-    movil_cont = models.CharField(max_length=8)
-    tlfn_cont = models.CharField(max_length=8)
-    tlfn_casa = models.CharField(max_length=8)
+    movil_cont = models.CharField(max_length=8, verbose_name="Móvil")
+    tlfn_cont = models.CharField(max_length=8, verbose_name="Teléfono")
+    tlfn_casa = models.CharField(max_length=8, verbose_name="Teléfono de casa")
     email_opt_out = models.CharField(max_length=10) #editar todavia
-    descrip_cont = models.CharField(max_length=100)
+    descrip_cont = models.CharField(max_length=100, verbose_name="Descripción")
 
     def __str__(self):
         return f'Contacto {self.apellido_cont}: {self.nombre_cont} {self.titulo_contacto} {self.email_cont} {self.empresa} {self.movil_cont} {self.tlfn_cont} {self.tlfn_casa} {self.email_opt_out} {self.descrip_cont}'
