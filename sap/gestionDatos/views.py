@@ -167,6 +167,7 @@ def agregar_usuario(request):
 
     return render(request, 'gestionDatos/usuario/agregar.html', data)
 
+
 def modificar_usuario(request, id):  # falta
     usuario = get_object_or_404(Usuario, us_name=id)
 
@@ -303,3 +304,25 @@ def agregar_trato(request):
             data['form'] = formulario
 
     return render(request, 'gestionDatos/empresa/agregar.html', data)
+
+
+def modificar_trato(request, id):  # falta
+    trato = get_object_or_404(Trato, us_name=id)
+
+    data = {
+        'form': TratoForm(instance=trato)
+    }
+
+    if request.method ==  'POST':
+        formulario = TratoForm(data=request.POST, instance=trato, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="trato")
+        data["form"]=formulario
+
+    return render(request, 'gestionDatos/trato/modificar.html', data)
+
+def eliminar_trato(request, id):
+    trato = get_object_or_404(Trato, pk=id)
+    trato.delete()
+    return redirect(to="trato")

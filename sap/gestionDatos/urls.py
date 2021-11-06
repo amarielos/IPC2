@@ -30,6 +30,9 @@ urlpatterns = [
     path('agregar-usuario', agregar_usuario, name='agregar_usuario'),
     path('modificar-usuario/<id>/', modificar_usuario, name="modificar_usuario"),
     path('eliminar-usuario/<id>/', eliminar_usuario, name="eliminar_usuario"),
+
     path('trato/', trato, name ='trato'),
     path('agregar-trato', agregar_trato, name='agregar_trato'),
+    path('modificar-trato/<id>/', modificar_trato, name="modificar_trato"),
+    path('eliminar-trato/<id>/', eliminar_trato, name="eliminar_trato"),
 ]
