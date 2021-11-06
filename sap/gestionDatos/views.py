@@ -141,6 +141,28 @@ def agregar_tarea(request):
 
     return render(request, 'gestionDatos/empresa/agregar.html', data)
 
+def modificar_tarea(request, id):  # falta
+    tarea = get_object_or_404(Tarea, nombre_emp=id)
+
+    data = {
+        'form': TareaForm(instance=tarea)
+    }
+
+    if request.method ==  'POST':
+        formulario = TareaForm(data=request.POST, instance=tarea, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="tarea")
+        data["form"]=formulario
+
+    return render(request, 'gestionDatos/tarea/modificar.html', data)
+
+
+def eliminar_tarea(request, id):
+    tarea = get_object_or_404(Tarea, id=id)
+    tarea.delete()
+    return redirect(to="tarea")
+
 
 # Usuario--------------------------------------------------------------------------------------------------------------
 def usuario(request):
