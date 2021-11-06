@@ -1,8 +1,7 @@
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
-
 
 def home(request):
     return render(request, 'gestionDatos/home.html')
@@ -46,7 +45,28 @@ def agregar_contacto(request):
         else:
             data['form'] = formulario
 
-    return render(request, 'gestionDatos/empresa/agregar.html', data)
+    return render(request, 'gestionDatos/contacto/agregar.html', data)
+
+def modificar_contacto(request, id):  # falta
+    contacto= get_object_or_404(Contacto, nombre_cont=id)
+
+    data = {
+        'form': ContactoForm(instance=contacto)
+    }
+
+    if request.method ==  'POST':
+        formulario = ContactoForm(data=request.POST, instance=contacto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="contacto")
+        data["form"]=formulario
+
+    return render(request, 'gestionDatos/contacto/modificar.html', data)
+
+def eliminar_contacto(request, id):
+    contacto = get_object_or_404(Contacto, id=id)
+    contacto.delete()
+    return redirect(to="contacto")
 
 
 # Producto-------------------------------------------------------------------------------------------------------------
@@ -73,6 +93,27 @@ def agregar_producto(request):
             data['form'] = formulario
 
     return render(request, 'gestionDatos/empresa/agregar.html', data)
+
+def modificar_producto(request, id):  # falta
+    producto= get_object_or_404(Contacto, nombre_prod=id)
+
+    data = {
+        'form': ProductoForm(instance=producto)
+    }
+
+    if request.method ==  'POST':
+        formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="producto")
+        data["form"]=formulario
+
+    return render(request, 'gestionDatos/producto/modificar.html', data)
+
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    producto.delete()
+    return redirect(to="producto")
 
 
 # Tarea---------------------------------------------------------------------------------------------------------------
@@ -124,7 +165,28 @@ def agregar_usuario(request):
         else:
             data['form'] = formulario
 
-    return render(request, 'gestionDatos/empresa/agregar.html', data)
+    return render(request, 'gestionDatos/usuario/agregar.html', data)
+
+def modificar_usuario(request, id):  # falta
+    usuario = get_object_or_404(Usuario, us_name=id)
+
+    data = {
+        'form': UsuarioForm(instance=usuario)
+    }
+
+    if request.method ==  'POST':
+        formulario = UsuarioForm(data=request.POST, instance=usuario, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="usuario")
+        data["form"]=formulario
+
+    return render(request, 'gestionDatos/usuario/modificar.html', data)
+
+def eliminar_usuario(request, id):
+    usuario = get_object_or_404(Usuario, pk=id)
+    usuario.delete()
+    return redirect(to="usuario")
 
 
 def detalleUser(request, id):
@@ -195,16 +257,27 @@ def agregar_empresa(request):
 
     return render(request, 'gestionDatos/empresa/agregar.html', data)
 
-
-def modificar_empresa(request, nombre):  # falta
-    empresa = get_object_or_404(Empresa, nombre_emp=nombre)
+def modificar_empresa(request, id):  # falta
+    empresa = get_object_or_404(Empresa, nombre_emp=id)
 
     data = {
         'form': EmpresaForm(instance=empresa)
     }
 
+    if request.method ==  'POST':
+        formulario = EmpresaForm(data=request.POST, instance=empresa, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="empresa")
+        data["form"]=formulario
+
     return render(request, 'gestionDatos/empresa/modificar.html', data)
 
+
+def eliminar_empresa(request, id):
+    empresa = get_object_or_404(Empresa, id=id)
+    empresa.delete()
+    return redirect(to="empresa")
 
 # Trato---------------------------------------------------------------------------------------------------------------
 def trato(request):

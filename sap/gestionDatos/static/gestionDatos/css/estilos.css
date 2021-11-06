@@ -42,6 +42,17 @@ li a.active, li a:hover{
     height: 60px;
     width: 100%;
 }
+
+footer {
+    background: #F9FD83;
+}
 body{
     background-image: url(fondof.jpg);
 }
+
+th, td {
+    color: white !important;
+}
+
+
+

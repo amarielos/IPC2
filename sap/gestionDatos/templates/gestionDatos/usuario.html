@@ -1,5 +1,6 @@
 {% extends "gestionDatos/base.html" %}
 {% load static %}
+
 {% block content %}
 
 
@@ -11,24 +12,25 @@
     </nav>
 <table class="table table-striped table-hoved">
     <tr>
+        <th>ID</th>
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Username</th>
         <th>E-mail</th>
-        <th>Contraseña</th>
         <th>Telefono</th>
+        <th>opciones</th>
     </tr>
 
     {% for p in usuarios %}
         <tr>
+            <td>{{p.pk}}</td>
             <td>{{p.us_name}}</td>
             <td>{{p.us_lastname}}</td>
             <td>{{p.username}}</td>
             <td>{{p.us_email}}</td>
             <td>{{p.us_phone}}</td>
-            <td>
-	        <a  class="btn btn-info btn-sm">modificar</a>
-            <a  class="btn btn-danger btn-sm">eliminar</a>
+            <td><a href="{% url 'modificar_usuario' p.us_name %}" class="btn btn-info btn-sm">modificar</a>
+                <a href="{% url 'eliminar_usuario' p.pk %}" class="btn btn-danger btn-sm">eliminar</a>
             </td>
         </tr>
     {% endfor %}

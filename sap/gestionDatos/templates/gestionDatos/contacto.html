@@ -31,33 +31,27 @@ method="POST">
 
 <table class="table table-striped table-hoved">
     <tr>
+        <th>ID</th>
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Titulo</th>
         <th>E-mail</th>
         <th>Empresa</th>
         <th>Movil</th>
-        <th>Telefono de contacto</th>
-        <th>Telefono de casa</th>
-        <th>E-mail opt out</th>
-        <th>Descripcion</th>
+        <th>opciones</th>
     </tr>
 
     {% for c in contactos %}
         <tr>
+            <td>{{p.id}}</td>
             <td>{{p.nombre_cont}}</td>
             <td>{{p.apellido_cont}}</td>
             <td>{{p.titulo_contacto}}</td>
             <td>{{p.email_cont}}</td>
             <td>{{p.empresa}}</td>
             <td>{{p.movil_cont}}</td>
-            <td>{{p.tlfn_cont}}</td>
-            <td>{{p.tlfn_casa}}</td>
-            <td>{{p.email_opt_out}}</td>
-            <td>{{p.descrip_cont}}</td>
-            <td>
-	        <a  class="btn btn-info btn-sm">modificar</a>
-            <a  class="btn btn-danger btn-sm">eliminar</a>
+            <td><a href="{% url 'modificar_contacto' p.nombre_cont %}" class="btn btn-info btn-sm">modificar</a>
+                <a href="{% url 'eliminar_contacto' p.id %}" class="btn btn-danger btn-sm">eliminar</a>
             </td>
         </tr>
     {% endfor %}

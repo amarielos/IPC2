@@ -3,22 +3,13 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<h2>Empresas</h2>
-    <nav class="user">
-        <ul>
-            <li><a href="/empresa">Listado</a></li>
-            <li><a href="">Buscar</a></li>
-        </ul>
-    </nav>
-
-
 <form action="" method="post">
 
     {% csrf_token %}
     {{form | crispy }}
 
     <input type="reset" value="cancelar" class="btn btn-secondary">
-    <input type="submit" value="Guardar" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary">Editar</button>
 
 </form>
 {{mensaje}}
